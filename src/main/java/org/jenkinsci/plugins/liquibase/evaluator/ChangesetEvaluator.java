@@ -45,6 +45,7 @@ import com.google.common.collect.Lists;
  */
 @SuppressWarnings("ProhibitedExceptionThrown")
 public class ChangesetEvaluator extends Builder {
+
     @Extension
     public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
@@ -65,21 +66,20 @@ public class ChangesetEvaluator extends Builder {
     private String labels;
     private String changeLogParameters;
 
-
     @DataBoundConstructor
     public ChangesetEvaluator(String databaseEngine,
-                              String changeLogFile,
-                              String username,
-                              String password,
-                              String url,
-                              String defaultSchemaName,
-                              String contexts,
-                              boolean testRollbacks,
-                              String liquibasePropertiesPath,
-                              boolean dropAll,
-                              String command,
-                              String classpath,
-                              String driverClassname, String labels) {
+            String changeLogFile,
+            String username,
+            String password,
+            String url,
+            String defaultSchemaName,
+            String contexts,
+            boolean testRollbacks,
+            String liquibasePropertiesPath,
+            boolean dropAll,
+            String command,
+            String classpath,
+            String driverClassname, String labels) {
         this.databaseEngine = databaseEngine;
         this.changeLogFile = changeLogFile;
         this.username = username;
@@ -148,9 +148,9 @@ public class ChangesetEvaluator extends Builder {
     }
 
     public Liquibase createLiquibase(AbstractBuild<?, ?> build,
-                                     BuildListener listener,
-                                     ExecutedChangesetAction action,
-                                     Properties configProperties, Launcher launcher) {
+            BuildListener listener,
+            ExecutedChangesetAction action,
+            Properties configProperties, Launcher launcher) {
         Liquibase liquibase;
         String driverName = getProperty(configProperties, LiquibaseProperty.DRIVER);
 
@@ -161,8 +161,8 @@ public class ChangesetEvaluator extends Builder {
 
             Connection connection = retrieveConnection(configProperties, driverName);
             JdbcConnection jdbcConnection = new JdbcConnection(connection);
-            Database database =
-                    DatabaseFactory.getInstance().findCorrectDatabaseImplementation(jdbcConnection);
+            Database database
+                    = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(jdbcConnection);
 
             ResourceAccessor resourceAccessor = new FilePathAccessor(build);
             liquibase = new Liquibase(configProperties.getProperty(LiquibaseProperty.CHANGELOG_FILE.propertyName()),
@@ -345,8 +345,8 @@ public class ChangesetEvaluator extends Builder {
     }
 
     public static class DescriptorImpl extends BuildStepDescriptor<Builder> {
-        private List<IncludedDatabaseDriver> includedDatabaseDrivers;
 
+        private List<IncludedDatabaseDriver> includedDatabaseDrivers;
 
         public DescriptorImpl() {
             load();
@@ -378,7 +378,8 @@ public class ChangesetEvaluator extends Builder {
                     new IncludedDatabaseDriver("PostgreSQL", "org.postgresql.Driver"),
                     new IncludedDatabaseDriver("Derby", "org.apache.derby.jdbc.EmbeddedDriver"),
                     new IncludedDatabaseDriver("Hypersonic", "org.hsqldb.jdbcDriver"),
-                    new IncludedDatabaseDriver("H2", "org.h2.Driver"));
+                    new IncludedDatabaseDriver("H2", "org.h2.Driver"),
+                    new IncludedDatabaseDriver("Oracle", "oracle.jdbc.OracleDriver"));
         }
     }
 

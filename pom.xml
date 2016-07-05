@@ -22,15 +22,20 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:ssh://github.com/jenkinsci/liquibase-runner-plugin.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/jenkinsci/liquibase-runner-plugin.git</developerConnection>
-        <url>https://github.com/jenkinsci/liqiubase-runner-plugin</url>
+        <connection>scm:git:ssh://github.com/dulyts/liquibase-runner-plugin.git</connection>
+        <developerConnection>scm:git:ssh://github.com/dulyts/liquibase-runner-plugin.git</developerConnection>
+        <url>https://github.com/dulyts/liquibase-runner-plugin</url>
     </scm>
     <developers>
         <developer>
             <id>Keith</id>
             <name>Keith Collison</name>
             <email>keithc238@gmail.com</email>
+        </developer>
+        <developer>
+            <id>gjobb</id>
+            <name>Gábor Jobb</name>
+            <email>jobb.gabor@gmail.com</email>
         </developer>
     </developers>
 
@@ -52,6 +57,11 @@
         <jenkins.version>1.580.1</jenkins.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.4.0</version>
+        </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
